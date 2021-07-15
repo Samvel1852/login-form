@@ -17,6 +17,7 @@ class Form extends React.Component {
       typedAge: "",
       typedEmail: "",
       typedPassword: "",
+      passwordErrorText: "",
     };
   }
 
@@ -55,12 +56,22 @@ class Form extends React.Component {
       this.setState({
         isValidName: false,
       });
+    } else {
+      this.setState({
+        isValidName: true,
+      });
     }
+
     if (!this.state.typedSurname.match(/^[A-Za-z]+$/)) {
       this.setState({
         isValidSurname: false,
       });
+    } else {
+      this.setState({
+        isValidSurname: true,
+      });
     }
+
     if (
       !this.state.typedEmail.match(
         /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
@@ -69,7 +80,12 @@ class Form extends React.Component {
       this.setState({
         isValidEmail: false,
       });
+    } else {
+      this.setState({
+        isValidEmail: true,
+      });
     }
+
     if (
       !this.state.typedAge.match(/^\d+$/) ||
       this.state.typedAge < 18 ||
@@ -78,14 +94,41 @@ class Form extends React.Component {
       this.setState({
         isValidAge: false,
       });
+    } else {
+      this.setState({
+        isValidAge: true,
+      });
     }
+
     if (
       !this.state.typedPassword.match(
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
       )
     ) {
+      if (!this.state.typedPassword.match(/[?=.*\d]/)) {
+        this.setState({
+          isValidPassword: false,
+          passwordErrorText: "Password should contain at least one digit",
+        });
+      } else if (!this.state.typedPassword.match(/.*[a-z].*/)) {
+        this.setState({
+          isValidPassword: false,
+          passwordErrorText: "Password should contain at least one lower case",
+        });
+      } else if (!this.state.typedPassword.match(/.*[A-Z].*/)) {
+        this.setState({
+          isValidPassword: false,
+          passwordErrorText: "Password should contain at least one upper case",
+        });
+      } else if (this.state.typedPassword.length < 8) {
+        this.setState({
+          isValidPassword: false,
+          passwordErrorText: "Password should contain at least 8 characters",
+        });
+      }
+    } else {
       this.setState({
-        isValidPassword: false,
+        isValidPassword: true,
       });
     }
   };
@@ -127,7 +170,7 @@ class Form extends React.Component {
         />
         <Input
           // isNotValid={this.state.isNotValid}
-          errorText={"Type valid password"}
+          errorText={this.state.passwordErrorText}
           name="Password"
           hidden={this.state.isValidPassword}
           handleFn={this.handlePassword}
