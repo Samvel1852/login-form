@@ -1,5 +1,11 @@
 .App {
+  display: flex;
   text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
 }
 
 .App-logo {
@@ -36,3 +42,30 @@
     transform: rotate(360deg);
   }
 }
+
+.formDiv {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 10px;
+}
+/* 
+.formDiv > label {
+  display: flex;
+  justify-content: space-between;
+  margin: 3px;
+} */
+
+/* .submitBtn {
+  width: 40%;
+  color: white;
+  background-color: #000;
+  transition: 0.4s;
+  margin-left: 50%;
+}
+
+.submitBtn:hover {
+  cursor: pointer;
+  background-color: gray;
+} */
