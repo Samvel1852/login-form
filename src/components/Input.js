@@ -1,9 +1,10 @@
-function Input({ name, isNotValid, errorText, typedName, handleName }) {
+function Input(props) {
+  console.log(props);
   return (
     <label>
-      {name + ":"}
-      <input onChange={handleName} value={typedName} name={name} />
-      <p hidden={isNotValid}>{errorText}</p>
+      {props.name + ":"}
+      <input onChange={props.handleFn} value={props.value} name={props.name} />
+      <p hidden={props.hidden}>{props.errorText}</p>
     </label>
   );
 }

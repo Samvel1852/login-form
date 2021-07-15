@@ -2,7 +2,7 @@ function Submit(props) {
   return (
     <button
       onClick={props.isAllValid}
-      disabled={props.disabled}
+      disabled={props.isAllFilled}
       className="submitBtn"
     >
       {"Submit"}
