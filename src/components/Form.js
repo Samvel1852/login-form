@@ -131,6 +131,21 @@ class Form extends React.Component {
         isValidPassword: true,
       });
     }
+
+    let isAllValid =
+      this.state.isValidName &&
+      this.state.isValidSurname &&
+      this.state.isValidEmail &&
+      this.state.isValidAge &&
+      this.state.isValidPassword;
+
+    if (isAllValid) {
+      localStorage.setItem("Name", this.state.typedName);
+      localStorage.setItem("Surname", this.state.typedSurname);
+      localStorage.setItem("Email", this.state.typedEmail);
+      localStorage.setItem("Age", this.state.typedAge);
+      localStorage.setItem("Password", this.state.typedPassword);
+    }
   };
 
   render() {
